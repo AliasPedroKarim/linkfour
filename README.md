@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Linktree Clone
 
-## Getting Started
+## Présentation du Projet
 
-First, run the development server:
+Ce projet vise à créer une plateforme web moderne et fonctionnelle similaire à Linktree, permettant aux utilisateurs de partager tous leurs liens en un seul endroit. Il utilise des technologies modernes pour offrir une expérience utilisateur fluide et réactive.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Technologies Utilisées
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Frontend** : [Next.js](https://nextjs.org) avec des composants UI basés sur la bibliothèque [shadcn/ui](https://ui.shadcn.com).
+- **Styles** : [TailwindCSS](https://tailwindcss.com) pour un design réactif et personnalisable.
+- **Authentification** : [Auth.js](https://authjs.dev) permettant aux utilisateurs de se connecter via Discord, Google, et Facebook.
+- **Base de Données** : [Prisma](https://www.prisma.io) connecté à une base de données relationnelle PostgreSQL, hébergée dans un conteneur Docker via Docker Compose.
+- **Cache** : Serveur [Redis](https://redis.io) inclus dans le fichier `docker-compose.yml` pour gérer les sessions ou les caches.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Fonctionnalités Principales
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Page d'Accueil (Landing Page)
 
-## Learn More
+- Design attrayant avec des Call-to-Action pour inciter les visiteurs à s’inscrire.
+- Sections mettant en avant les fonctionnalités : gestion des liens, QR codes, statistiques, etc.
+- Une section de contact et de branding pour présenter la plateforme.
 
-To learn more about Next.js, take a look at the following resources:
+### Gestion des Comptes Utilisateur
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Pages de profil utilisateur permettant de mettre à jour l'avatar, le nom, l'email, et le mot de passe.
+- Option pour supprimer le compte avec confirmation.
+- Authentification sécurisée et gestion des connexions via OAuth (Discord, Google, Facebook).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Gestion des Liens et des Pages de Liens
 
-## Deploy on Vercel
+- Interface utilisateur pour créer et organiser des pages contenant des listes de liens.
+- Personnalisation des liens : icônes des plateformes courantes ou icônes personnalisées.
+- Fonctionnalité de raccourcissement des URL et de génération de QR codes associés à chaque lien.
+- Gestion des redirections simples vers des URL externes.
+- Statistiques détaillées pour chaque lien ou page de liens : nombre de clics, localisation géographique, appareil utilisé, etc.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Dashboard Utilisateur
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Vue d'ensemble des statistiques globales pour un utilisateur.
+- Présentation des performances des pages de liens et des liens individuels.
+
+### Super Administration
+
+- Tableau de bord pour surveiller les statistiques globales de la plateforme (liens, pages vues, utilisateurs actifs, etc.).
+- Mécanisme de logging avancé : IP de l’utilisateur, appareil utilisé, et autres métadonnées pertinentes.
+- Outils pour modérer ou supprimer des contenus.
+
+## Backend
+
+- Serveur Next.js pour gérer les API REST ou GraphQL nécessaires aux fonctionnalités.
+- Gestion des données utilisateurs, liens, et logs avec Prisma et PostgreSQL.
+
+## Infrastructure et DevOps
+
+- Hébergement de la base de données PostgreSQL et d'un serveur Redis via Docker Compose.
+- Configurations prêtes pour le déploiement sur un environnement cloud (AWS, Vercel, ou autre).
+
+## Instructions Complémentaires
+
+- Garantir une interface intuitive et accessible sur tous les appareils.
+- Intégrer une architecture modulaire permettant des évolutions futures (ajout de nouvelles fonctionnalités).
+- Fournir un code propre et bien documenté pour faciliter la maintenance.
+
+## Démarrage
+
+Pour démarrer le projet, suivez ces étapes :
+
+1. Clonez le dépôt :
+   ```bash
+   git clone <URL_DU_DEPOT>
+   cd linktree-clone
+   ```
+
+2. Installez les dépendances :
+   ```bash
+   npm install
+   # ou
+   yarn install
+   # ou
+   pnpm install
+   ```
+
+3. Exécutez Docker Compose pour démarrer les services :
+   ```bash
+   docker-compose up
+   ```
+
+4. Ouvrez votre navigateur et accédez à [http://localhost:3000](http://localhost:3000).
+
+## Contributions
+
+Les retours et contributions sont les bienvenus ! N'hésitez pas à ouvrir des issues ou des pull requests sur le dépôt GitHub.
