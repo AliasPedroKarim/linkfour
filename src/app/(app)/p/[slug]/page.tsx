@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation"
+import { headers } from "next/headers"
 import { prisma } from "@/lib/prisma"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -10,7 +11,23 @@ interface PageProps {
   }
 }
 
+async function logPageView(pageId: string, headersList: Headers) {
+  const userAgent = headersList.get("user-agent")
+  const ip = headersList.get("x-forwarded-for")
+  const referer = headersList.get("referer")
+
+  await prisma.pageView.create({
+    data: {
+      pageId,
+      userAgent,
+      ip,
+      referer,
+    },
+  })
+}
+
 export default async function Page({ params }: PageProps) {
+  const headersList = headers()
   const page = await prisma.page.findUnique({
     where: { 
       slug: params.slug,
@@ -32,6 +49,9 @@ export default async function Page({ params }: PageProps) {
   if (!page) {
     notFound()
   }
+
+  // Log la vue de page de manière asynchrone
+  logPageView(page.id, headersList).catch(console.error)
 
   return (
     <div className={cn(
