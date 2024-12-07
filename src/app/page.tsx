@@ -1,31 +1,62 @@
-import { Nav } from "@/components/nav"
+import { Navbar } from "@/components/landing/navbar"
+import { Features } from "@/components/landing/features"
+import { Stats } from "@/components/landing/stats"
+import { CTA } from "@/components/landing/cta"
+import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import Image from "next/image"
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="flex min-h-screen flex-col">
-      <Nav />
-      <main className="flex-1">
-        <section className="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">
-          <div className="container flex max-w-[64rem] flex-col items-center gap-4 text-center">
-            <h1 className="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl">
-              Partagez tous vos liens en un seul endroit
+    <>
+      <Navbar />
+      <main className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+        {/* Hero Section */}
+        <section className="container flex flex-col items-center justify-center gap-8 pt-32 pb-20 text-center">
+          <div className="space-y-6 max-w-3xl">
+            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
+              Partagez tous vos liens <br />
+              en une seule page
             </h1>
-            <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">
-              Créez votre page de liens personnalisée gratuitement. Partagez vos réseaux sociaux, site web, et plus encore.
+            <p className="mx-auto max-w-[700px] text-lg text-muted-foreground md:text-xl">
+              Créez une page personnalisée pour partager tous vos liens importants. Simple, élégant et professionnel.
             </p>
-            <div className="space-x-4">
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Button asChild size="lg">
-                <Link href="/register">Commencer gratuitement</Link>
+                <Link href="/auth/register">
+                  Commencer gratuitement
+                </Link>
               </Button>
               <Button asChild size="lg" variant="outline">
-                <Link href="/features">En savoir plus</Link>
+                <Link href="/demo">
+                  Voir un exemple
+                </Link>
               </Button>
             </div>
           </div>
+          <div className="relative w-full max-w-5xl">
+            <Image
+              src="/images/hero.png"
+              alt="Aperçu de LinkFour"
+              width={1280}
+              height={720}
+              className="rounded-lg border shadow-2xl"
+              priority
+            />
+          </div>
         </section>
+
+        {/* Stats Section */}
+        <Stats />
+
+        {/* Features Section */}
+        <Features />
+
+        {/* CTA Section */}
+        <CTA />
       </main>
-    </div>
+      <Footer />
+    </>
   )
 } 

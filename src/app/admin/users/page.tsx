@@ -1,14 +1,13 @@
-import { getServerSession } from "next-auth/next"
+import { auth } from "@/lib/auth"
 import { redirect } from "next/navigation"
 import { prisma } from "@/lib/prisma"
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"
 import { isAdmin } from "@/lib/auth"
 import { DataTable } from "./data-table"
 import { columns } from "./columns"
 import { format } from "date-fns"
 
 export default async function UsersPage() {
-  const session = await getServerSession(authOptions)
+  const session = await auth()
   if (!session?.user?.email || !isAdmin(session.user.email)) {
     redirect("/auth/login")
   }

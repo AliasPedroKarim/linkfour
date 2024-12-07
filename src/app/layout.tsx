@@ -1,32 +1,34 @@
-import { Inter } from "next/font/google"
-import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
-import { Providers } from "./providers"
-import { useSecurityLog } from "@/hooks/use-security-log"
+import { Inter } from "next/font/google";
+import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Providers } from "./providers";
+import { SecurityLog } from "@/components/security-log";
+import { Toaster } from "@/components/ui/sonner";
+import { Navbar } from "@/components/landing/navbar";
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
-  children,
+	children,
 }: {
-  children: React.ReactNode
+	children: React.ReactNode;
 }) {
-  useSecurityLog()
-
-  return (
-    <html lang="fr" suppressHydrationWarning>
-      <body className={inter.className}>
-        <Providers>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
-        </Providers>
-      </body>
-    </html>
-  )
-} 
+	return (
+		<html lang="fr" suppressHydrationWarning>
+			<body className={inter.className}>
+				<Providers>
+					<ThemeProvider
+						attribute="class"
+						defaultTheme="system"
+						enableSystem
+						disableTransitionOnChange
+					>
+						<SecurityLog />
+						{children}
+						<Toaster richColors />
+					</ThemeProvider>
+				</Providers>
+			</body>
+		</html>
+	);
+}

@@ -23,6 +23,7 @@ model User {
   securityLogs  SecurityLog[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
+  password      String?
 }
 
 model Account {

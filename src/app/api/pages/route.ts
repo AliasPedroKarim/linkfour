@@ -1,7 +1,6 @@
-import { getServerSession } from "next-auth/next"
+import { auth } from "@/lib/auth"
 import { NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
-import { authOptions } from "../auth/[...nextauth]/route"
 import { z } from "zod"
 
 const pageSchema = z.object({
@@ -13,7 +12,7 @@ const pageSchema = z.object({
 })
 
 export async function POST(request: Request) {
-  const session = await getServerSession(authOptions)
+  const session = await auth()
   if (!session?.user) {
     return new NextResponse("Non autorisé", { status: 401 })
   }
@@ -48,7 +47,7 @@ export async function POST(request: Request) {
 }
 
 export async function GET(request: Request) {
-  const session = await getServerSession(authOptions)
+  const session = await auth()
   if (!session?.user) {
     return new NextResponse("Non autorisé", { status: 401 })
   }
