@@ -13,6 +13,8 @@ export default function RootLayout({
 }: {
 	children: React.ReactNode;
 }) {
+	console.log("Admin emails:", process.env.ADMIN_EMAILS);
+
 	return (
 		<html lang="fr" suppressHydrationWarning>
 			<body className={inter.className}>

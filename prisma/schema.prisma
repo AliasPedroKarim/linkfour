@@ -130,16 +130,14 @@ model Report {
 }
 
 model SecurityLog {
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   event     String
-  userAgent String?
   ip        String?
+  userAgent String?
   details   String?
-  timestamp DateTime @default(now())
   userId    String?
-  user      User?    @relation(fields: [userId], references: [id])
+  user      User?     @relation(fields: [userId], references: [id])
+  createdAt DateTime  @default(now())
 
   @@index([userId])
-  @@index([event])
-  @@index([timestamp])
 } 
